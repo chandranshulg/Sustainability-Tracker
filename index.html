@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainability Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #2f4f4f;
+        }
+        .activity-form {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .activity-form input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .activity-form button {
+            padding: 10px 20px;
+            background-color: #2f4f4f;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .activity-form button:hover {
+            background-color: #1e3939;
+        }
+        .activity-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .activity-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #e0ffff;
+            border: 1px solid #b0e0e6;
+            border-radius: 4px;
+        }
+        .activity-item span {
+            flex: 1;
+        }
+        .activity-item button {
+            background-color: #ff6347;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .activity-item button:hover {
+            background-color: #e5533d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sustainability Tracker</h1>
+        <form class="activity-form" onsubmit="addActivity(event)">
+            <input type="text" id="activity-input" placeholder="Enter your sustainability activity" required>
+            <button type="submit">Add Activity</button>
+        </form>
+        <ul class="activity-list" id="activity-list">
+            <!-- Activities will be added here -->
+        </ul>
+    </div>
+
+    <script>
+        // Function to add a new activity to the list
+        function addActivity(event) {
+            event.preventDefault();
+            const activityInput = document.getElementById('activity-input');
+            const activityText = activityInput.value.trim();
+            
+            if (activityText !== '') {
+                const activityList = document.getElementById('activity-list');
+
+                // Create a new list item
+                const listItem = document.createElement('li');
+                listItem.className = 'activity-item';
+
+                // Create a span to hold the activity text
+                const span = document.createElement('span');
+                span.textContent = activityText;
+
+                // Create a button to delete the activity
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = function() {
+                    activityList.removeChild(listItem);
+                };
+
+                // Append the span and delete button to the list item
+                listItem.appendChild(span);
+                listItem.appendChild(deleteButton);
+
+                // Add the list item to the activity list
+                activityList.appendChild(listItem);
+
+                // Clear the input field
+                activityInput.value = '';
+            }
+        }
+    </script>
+</body>
+</html>
